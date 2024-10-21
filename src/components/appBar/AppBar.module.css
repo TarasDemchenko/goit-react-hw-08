@@ -1,0 +1,24 @@
+* {
+  text-decoration: none;
+}
+.navlink {
+  color: white;
+}
+button {
+  color: black;
+  border-radius: 5px;
+  background-color: white;
+}
+.body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkgreen;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.nav {
+  display: flex;
+  gap: 15px;
+}
