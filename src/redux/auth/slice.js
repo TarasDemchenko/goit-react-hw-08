@@ -20,19 +20,24 @@ const slice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.isRefreshing = true;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.isRefreshing = true;
       })
       .addCase(logout.fulfilled, () => initialState)
       .addCase(refresh.fulfilled, (state, action) => {
         state.user.name = action.payload.name;
         state.user.email = action.payload.email;
         state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(refresh.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refresh.rejected, state => {
+        state.isRefreshing = false;
       });
   },
 });

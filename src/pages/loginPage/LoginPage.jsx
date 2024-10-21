@@ -1,8 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import s from './LoginPage.module.css';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth/operations';
+
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { Navigate } from 'react-router-dom';
 
 const validation = Yup.object().shape({
   email: Yup.string()
@@ -27,6 +30,12 @@ const LoginPage = () => {
     dispatch(login(values));
     options.resetForm();
   };
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
   return (
     <div>
       <Formik
